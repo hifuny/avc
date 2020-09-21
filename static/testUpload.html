@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>海峰</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <header class="bar bar-nav">
+            <h1 class="title">hifun test upload</h1>
+        </header>
+        <div class="bar bar-tab">
+            <div class="row">
+                <div class="col-50">
+                    <form id="signupListImportForm" enctype="multipart/form-data">
+                        <input type="file" id="btn_file" style="display:none" name="
+                            uploadFiles" onchange="uploadFile()">
+                    </form>
+                    <a onclick="selectFile()" class="button button-big button-fill">上传</a>
+                </div>
+            </div>
+        </div>
+        <!-- 你的html代码 -->
+    </div>
+</div>
+<script type="text/javascript">
+    function selectFile(){
+        var file = document.getElementById("btn_file").click();
+    }
+    function uploadFile() {
+        var file=document.getElementById("btn_file").files[0];
+        var forData=new FormData();
+        forData.append("appName","mphone");
+        forData.append("uploadFile",file);
+        $.ajax({
+            //url:"http://localhost:8090/upload",
+			url:"http://devopswebtest.qknode.com/upload",
+            type:"post",
+            data:forData,
+            processData:false,
+            contentType:false,
+            success:function(res){
+                if (res){
+                    alert("上传成功！",res);
+                }else {
+					console.log('upload success');
+				}
+            },
+			error: function (res){
+				if (res){
+                    alert("失败：！ ",res);
+                }else {
+					console.log('upload fail');
+				}
+			}
+        });
+    }
+</script>
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+</body>
+</html>
